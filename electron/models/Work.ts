@@ -12,7 +12,7 @@ const Work = sequelize.define('Work', {
     host: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
-    parkey: DataTypes.STRING,
+    privatekey: DataTypes.STRING,
     source: DataTypes.STRING,
     target: DataTypes.STRING,
     exclude:DataTypes.TEXT,
