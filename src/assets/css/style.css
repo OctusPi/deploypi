@@ -51,38 +51,37 @@
 .txt-color-sec{
 	color: var(--muted-text-color);
 }
-
 .label-input {
 	@apply block mb-1 font-normal text-xs;
 }
 
-.input-form {
-	@apply py-2 px-3 font-medium text-base
+.form-input {
+	@apply py-2 px-3 rounded-md border-none font-medium text-base
     focus:blur-0 shadow-none outline-none;
 
 	color: var(--text-color);
 	font-size: 0.9rem;
-	background-color: transparent;
-	border-bottom: 1px solid var(--input-border-color) !important;
+	background-color: var(--input-background);
+	border: 1px solid var(--input-border-color);
 	transition: 0.3s;
 
 }
 
-.input-form:focus {
+.form-input:focus {
 	@apply shadow-sm;
 
 	border-color: var(--input-border-color);
 	color: var(--text-color);
-	background-color: transparent;
-	border-bottom: 1px solid var(--primary-color);
+	background-color: var(--input-background);
+	border: 1px solid var(--primary-color);
 }
 
-select.input-form {
+select.form-input {
 	padding-top: 11px;
 	padding-bottom: 11px;
 }
 
-select.input-form option{
+select.form-input option{
 	font-weight: 600;
 	font-family:
 		Inter,
@@ -100,8 +99,8 @@ select.input-form option{
 }
 
 .form-control-alert {
-	border-bottom: 1px solid var(--error-color-hover);
-	background-color: transparent;
+	border: 1px solid var(--error-color-hover);
+	background-color: var(--input-background);
 }
 
 .input-basket{
@@ -123,7 +122,7 @@ select.input-form option{
 }
 
 .btn-action {
-	@apply bg-violet-600 hover:bg-violet-500 text-white focus-visible:outline focus-visible:outline-0 focus-visible:outline-offset-2 focus-visible:outline-violet-600;
+	@apply inline-flex justify-center bg-blue-100 hover:bg-blue-200 px-4 py-2 border border-transparent rounded-md focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 font-medium text-blue-900 text-sm focus:outline-none;
 }
 
 .btn-danger {

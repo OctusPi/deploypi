@@ -7,7 +7,7 @@
             </TransitionChild>
 
             <div class="fixed inset-0 overflow-y-auto">
-                <div class="flex justify-center items-center p-4 min-h-full text-center">
+                <div class="flex justify-center items-center p-6 min-h-full text-center">
                     <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0 scale-95"
                         enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
                         leave-to="opacity-0 scale-95">
@@ -16,18 +16,25 @@
                             <DialogTitle as="h3" class="font-medium text-gray-900 text-lg leading-6">
                                 Dados do Projeto
                             </DialogTitle>
-                            <div class="mt-2">
-                                <p class="text-gray-500 text-sm">
-                                    Your payment has been successfully submitted. We’ve sent you
-                                    an email with all of the details of your order.
-                                </p>
+                            <div class="gap-4 grid grid-cols-6 mt-6">
+                                <div class="col-span-6">
+                                    <label for="name" class="label-input">Projeto</label>
+                                    <input id="name" name="name" type="text" class="form-input w-full" />
+                                </div>
+                                <div class="col-span-6">
+                                    <label for="description" class="label-input">Descrição</label>
+                                    <input id="description" name="description" type="text" class="form-input w-full" />
+                                </div>
+                                <div class="col-span-6">
+                                    <label for="stack" class="label-input">Stack</label>
+                                    <input id="stack" name="stack" type="text" class="form-input w-full" />
+                                </div>
                             </div>
 
-                            <div class="mt-4">
-                                <button type="button"
-                                    class="inline-flex justify-center bg-blue-100 hover:bg-blue-200 px-4 py-2 border border-transparent rounded-md focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 font-medium text-blue-900 text-sm focus:outline-none"
-                                    @click="closeModal">
-                                    Got it, thanks!
+                            <div class="mt-6">
+                                <button type="button" class="btn btn-action" @click="closeModal">
+                                    <component :is="CheckIcon" class="w-5 h-5 me-1" />
+                                    Confirmar
                                 </button>
                             </div>
                         </DialogPanel>
@@ -41,6 +48,7 @@
 <script setup>
 
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
+import { CheckIcon } from '@heroicons/vue/24/outline';
 
 const isOpen = defineModel({ type: Boolean, default: () => false })
 
