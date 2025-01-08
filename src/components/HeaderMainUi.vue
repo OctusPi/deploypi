@@ -1,5 +1,5 @@
 <template>
-    <header class="fixed p-3 border-b border-b-gray-600 border-opacity-50 w-full">
+    <header class="fixed p-3 border-b border-b-gray-400 border-opacity-50 w-full">
         <div class="flex justify-between items-center">
             <div class="flex items-center me-6">
                 <img src="/logo.svg" class="w-8 h-8 me-4">

@@ -3,7 +3,7 @@
         <Dialog as="div" @close="closeModal(false)" class="relative z-10">
             <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0" enter-to="opacity-100"
                 leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-25">
-                <div class="fixed inset-0 bg-black/25" />
+                <div class="fixed inset-0 bg-black/25 backdrop-blur-sm" />
             </TransitionChild>
 
             <div class="fixed inset-0 overflow-y-auto">
@@ -12,8 +12,8 @@
                         enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
                         leave-to="opacity-0 scale-95">
                         <DialogPanel
-                            class="shadow-xl p-6 rounded-2xl w-full max-w-md text-left transform transition-all overflow-hidden align-middle box">
-                            <DialogTitle as="h3" class="font-medium text-gray-900 text-lg leading-6">
+                            class="shadow-xl p-6 rounded-lg w-full max-w-md text-left transform transition-all overflow-hidden align-middle box">
+                            <DialogTitle as="h3" class="font-medium text-md leading-6">
                                 Dados do Projeto
                             </DialogTitle>
                             <div class="gap-4 grid grid-cols-6 mt-6">
@@ -23,18 +23,19 @@
                                 </div>
                                 <div class="col-span-6">
                                     <label for="description" class="label-input">Descrição</label>
-                                    <input id="description" name="description" type="text" class="form-input w-full" />
+                                    <textarea id="description" name="description" type="text" class="form-input w-full"></textarea>
                                 </div>
-                                <div class="col-span-6">
-                                    <label for="stack" class="label-input">Stack</label>
-                                    <input id="stack" name="stack" type="text" class="form-input w-full" />
-                                </div>
+                                
                             </div>
 
-                            <div class="mt-6">
+                            <div class="flex justify-center items-center space-x-2 mt-6">
                                 <button type="button" class="btn btn-action" @click="closeModal">
                                     <component :is="CheckIcon" class="w-5 h-5 me-1" />
                                     Confirmar
+                                </button>
+                                <button type="button" class="btn btn-cancel" @click="closeModal">
+                                    <component :is="XMarkIcon" class="w-5 h-5 me-1" />
+                                    Cancelar
                                 </button>
                             </div>
                         </DialogPanel>
@@ -48,7 +49,7 @@
 <script setup>
 
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
-import { CheckIcon } from '@heroicons/vue/24/outline';
+import { CheckIcon, XMarkIcon } from '@heroicons/vue/24/outline';
 
 const isOpen = defineModel({ type: Boolean, default: () => false })
 

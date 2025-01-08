@@ -1,6 +1,5 @@
-import { Sequelize, DataTypes } from 'sequelize';
-
-const sequelize = new Sequelize('sqlite::memory:');
+import { DataTypes } from 'sequelize';
+import sequelize from '../database/connection';
 
 const History = sequelize.define('History', {
     id: {
@@ -9,7 +8,8 @@ const History = sequelize.define('History', {
         primaryKey: true,
     },
     project: DataTypes.BIGINT,
-    work: DataTypes.BIGINT
+    work: DataTypes.BIGINT,
+    log: DataTypes.TEXT
 });
 
 export default History

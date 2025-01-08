@@ -6,6 +6,6 @@ test('Check Table Name', () => {
 })
 
 test('Check Attrs Model', () => {
-    const attrs = ['id', 'project', 'work', 'createdAt', 'updatedAt']
+    const attrs = ['id', 'project', 'work', 'log', 'createdAt', 'updatedAt']
     expect(Object.keys(History.getAttributes())).toEqual(attrs)
 })

@@ -1,6 +1,6 @@
-import { Sequelize, DataTypes } from 'sequelize';
+import { DataTypes } from 'sequelize';
 
-const sequelize = new Sequelize('sqlite::memory:');
+import sequelize from '../database/connection';
 
 const Work = sequelize.define('Work', {
     id: {

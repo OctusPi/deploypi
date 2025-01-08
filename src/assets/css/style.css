@@ -40,13 +40,12 @@
 }
 
 .form-input {
-	@apply py-2 px-3 rounded-md border-none font-medium text-base
+	@apply py-2 px-3 rounded-md border font-medium text-base
     focus:blur-0 shadow-none outline-none;
 
 	color: var(--text-color);
 	font-size: 0.9rem;
 	background-color: var(--input-background);
-	border: 1px solid var(--input-border-color);
 	transition: 0.3s;
 
 }
@@ -57,7 +56,6 @@
 	border-color: var(--input-border-color);
 	color: var(--text-color);
 	background-color: var(--input-background);
-	border: 1px solid var(--primary-color);
 }
 
 select.form-input {
@@ -87,8 +85,11 @@ select.form-input option{
 	background-color: var(--input-background);
 }
 
-.input-basket{
-	background-color: var(--background-secondary) !important;
+.form-input-search{
+	@apply py-1 px-0 border-b text-sm
+    focus:blur-0 shadow-none outline-none;
+
+	background-color: transparent;
 }
 
 .dash-box-container{
@@ -125,6 +126,10 @@ select.form-input option{
 	@apply text-xs text-violet-100 hover:text-white shadow-none font-normal;
 }
 
+.btn-sm{
+	background-color: var(--background-color)
+}
+
 .tls-grey{
 	@apply inline-flex items-center rounded-full bg-gray-50 bg-opacity-80 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10;
 }
@@ -140,4 +145,5 @@ select.form-input option{
 .tls-red{
 	@apply inline-flex items-center rounded-full bg-red-50 bg-opacity-80 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-700/10;
 }
+
 
