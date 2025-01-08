@@ -2,7 +2,7 @@
     <TransitionRoot appear :show="isOpen" as="template">
         <Dialog as="div" @close="closeModal(false)" class="relative z-10">
             <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0" enter-to="opacity-100"
-                leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0">
+                leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-25">
                 <div class="fixed inset-0 bg-black/25" />
             </TransitionChild>
 
@@ -12,7 +12,7 @@
                         enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
                         leave-to="opacity-0 scale-95">
                         <DialogPanel
-                            class="bg-white shadow-xl p-6 rounded-2xl w-full max-w-md text-left transform transition-all overflow-hidden align-middle">
+                            class="shadow-xl p-6 rounded-2xl w-full max-w-md text-left transform transition-all overflow-hidden align-middle box">
                             <DialogTitle as="h3" class="font-medium text-gray-900 text-lg leading-6">
                                 Dados do Projeto
                             </DialogTitle>
