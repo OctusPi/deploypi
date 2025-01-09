@@ -22,7 +22,7 @@
     </header>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { RouterLink } from 'vue-router';
 import { DocumentTextIcon, CommandLineIcon } from '@heroicons/vue/24/outline';
 </script>

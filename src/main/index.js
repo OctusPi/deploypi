@@ -1,11 +1,10 @@
 import { app, shell, BrowserWindow, dialog } from "electron";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
-
 import { join } from "path";
-// import fs from "fs";
-// import Ipc from "./ipc";
+import Ipc from "./ipc";
 // import Controller from "./controller";
 import migrations from "./database/migrations";
+import Controller from "./controller";
 
 function createWindow() {
     // Create the browser window.
@@ -21,85 +20,19 @@ function createWindow() {
         },
     });
 
-
+    // execute migrations
     migrations.exec()
 
-
-    // const ipc = new Ipc(mainWindow.webContents);
-    // const controller = new Controller();
-
-
-    // migrations.createTables();
-
-    // ipc.request("setup_conf", async (data) => {
-    //     async function check_setup(data) {
-    //         const exec = await controller.exec_query(data);
-    //         ipc.response(data.action, exec);
-    //     }
-
-    //     async function save_setup(data) {
-    //         data.data.token = token.encode(data.data.adminpass);
-    //         const { filePath } = await dialog.showSaveDialog({
-    //             defaultPath: "token-recover.txt",
-    //         });
-
-    //         if (!filePath) return;
-
-    //         fs.writeFile(filePath, data.data.token, (err) => {
-    //             if (err) {
-    //                 console.log(err.message);
-	// 				dialog.showMessageBox(
-	// 					mainWindow,
-	// 					{ message: "Falha ao salvar token" },
-	// 					() => null,
-	// 				);
-    //             }
-    //         });
-
-    //         const exec = await controller.exec_query(data);
-    //         ipc.response(data.action, exec);
-    //     }
-
-    //     async function update_setup(data) {
-    //         const exec = await controller.exec_query(data);
-    //         ipc.response(data.action, exec);
-    //     }
-
-    //     async function destroy_setup(data) {
-    //         const exec = await controller.exec_query(data);
-    //         ipc.response(data.action, !exec);
-    //     }
-
-    //     switch (data.action) {
-    //         case "Setting.one":
-    //             await check_setup(data);
-    //             break;
-
-    //         case "Setting.check":
-    //             await check_setup(data);
-    //             break;
-
-    //         case "Setting.save":
-    //             await save_setup(data);
-    //             break;
-
-    //         case "Setting.update":
-    //             await update_setup(data);
-    //             break;
-
-    //         case "Setting.destroy":
-    //             await destroy_setup(data);
-    //             break;
-    //     }
-    // });
-
-    // ipc.request("query_db", async (data) => {
-    //     const exec = await controller.exec_query(data);
-    //     ipc.response(data.action, exec);
-    // });
+    // start communication ipc
+    const ipc = new Ipc(mainWindow.webContents);
+    ipc.request('ipc-renderer', async(data) => {
+        const controller = new Controller(data)
+        const query = await controller.query()
+        ipc.response(data?.ipcid, query.toJson())
+    })
 
     mainWindow.on("ready-to-show", () => {
-        mainWindow.maximize();
+        // mainWindow.maximize();
         mainWindow.show();
     });
 

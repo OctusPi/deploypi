@@ -24,7 +24,7 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { reactive } from 'vue'
 import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/vue/24/outline';
 import ProjectForm from '../components/forms/ProjectForm.vue';

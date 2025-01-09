@@ -5,7 +5,7 @@ import { Model, DataTypes, Sequelize } from 'sequelize';
 const sequelize = new Sequelize(credentials);
 
 
-class Project extends Model {}
+class Project extends Model { }
 Project.init({
     id: {
         type: DataTypes.INTEGER,
@@ -14,9 +14,10 @@ Project.init({
     },
     name: DataTypes.STRING,
     description: DataTypes.STRING
-},{
-  sequelize,
-  timestamps: true
+}, {
+    sequelize,
+    modelName: 'Project',
+    timestamps: true
 })
 
 

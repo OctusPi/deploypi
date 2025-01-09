@@ -4,7 +4,7 @@ import { Model, DataTypes, Sequelize } from 'sequelize';
 
 const sequelize = new Sequelize(credentials);
 
-class Work extends Model {}
+class Work extends Model { }
 
 Work.init({
     id: {
@@ -19,11 +19,12 @@ Work.init({
     privatekey: DataTypes.STRING,
     source: DataTypes.STRING,
     target: DataTypes.STRING,
-    exclude:DataTypes.TEXT,
+    exclude: DataTypes.TEXT,
     routines: DataTypes.TEXT
-},{
-  sequelize,
-  timestamps: true
+}, {
+    sequelize,
+    modelName: 'Work',
+    timestamps: true
 })
 
 export default Work
