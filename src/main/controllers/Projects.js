@@ -7,3 +7,4 @@ class Projects extends Controller
         super(Project)
     }
 }
+export default Projects

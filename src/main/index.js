@@ -4,7 +4,7 @@ import { join } from "path";
 import Ipc from "./ipc";
 // import Controller from "./controller";
 import migrations from "./database/migrations";
-import Controller from "./controller";
+import Routers from "./routers";
 
 function createWindow() {
     // Create the browser window.
@@ -21,14 +21,13 @@ function createWindow() {
     });
 
     // execute migrations
-    migrations.exec()
+    migrations.sync()
 
     // start communication ipc
     const ipc = new Ipc(mainWindow.webContents);
-    ipc.request('ipc-renderer', async(data) => {
-        const controller = new Controller(data)
-        const query = await controller.query()
-        ipc.response(data?.ipcid, query.toJson())
+    ipc.request('post', async(data) => {
+        const routers = new Routers()
+        ipc.response(data?.ipcid, routers.post(data.controller, data.action, data.request))
     })
 
     mainWindow.on("ready-to-show", () => {

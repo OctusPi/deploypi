@@ -17,7 +17,7 @@
                 </div>
             </header>
 
-            <input v-if="project.ui.searchInput" type="text" class="flex-1 form-input-search w-full" name="search" v-model="project.search.name" />
+            <input v-if="project.ui.searchInput" type="text" class="flex-1 form-input-search w-full" name="search" v-model="project.search.name" placeholder="localizar projeto" />
 
         </aside>
         <section class="px-4 py-2 section-main">Projetos</section>

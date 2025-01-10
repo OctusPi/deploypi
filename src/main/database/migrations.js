@@ -4,7 +4,7 @@ import Project from '../models/Project'
 import Work from '../models/Work'
 import History from '../models/History'
 
-function exec()
+function sync()
 {
     if (!fs.existsSync(credentials.storage)) {
         const models = [Project, Work, History]
@@ -15,6 +15,6 @@ function exec()
 }
 
 export default {
-    exec
+    sync
 }
 

@@ -7,3 +7,5 @@ class Histories extends Controller
         super(History)
     }
 }
+
+export default Histories

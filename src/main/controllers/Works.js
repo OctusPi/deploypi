@@ -7,3 +7,5 @@ class Works extends Controller
         super(Work)
     }
 }
+
+export default Works

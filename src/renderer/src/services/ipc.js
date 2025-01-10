@@ -1,9 +1,9 @@
 
 class Ipc{
-    
+
     async request(listen, data, callback = null){
         await window.electron.ipcRenderer.send(listen, data)
-        if(callback){ await this.response(data.action, callback) }
+        if(callback){ await this.response(data.ipcid, callback) }
     }
 
     async response(listen, callback){

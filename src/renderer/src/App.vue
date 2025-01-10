@@ -13,7 +13,7 @@ import Ipc from './services/ipc'
 onMounted(() => {
     const ipc = new Ipc()
     ipc.request('ipc-renderer', {
-        model: 'Project',
+        controller: 'projects',
         action: 'save',
         ipcid: 'pidsave-project',
         params: {
@@ -22,7 +22,7 @@ onMounted(() => {
         }
     }, (data) => {
         console.log(data);
-        
+
     })
 })
 </script>
