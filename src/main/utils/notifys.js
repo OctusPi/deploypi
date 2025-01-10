@@ -1,22 +1,23 @@
 
-function notify(type, msg){
-    return { show:true, data:{type: type, msg:msg} }
+function notify(status, msg, code){
+    return { status, msg, code}
 }
 
-function success(msg){
-    return notify('success', msg)
+function success(msg = '') {
+    const defineMsg = `Operação realizada com sucesso. ${msg}`
+    return notify('success', defineMsg, 200)
 }
 
-function warning(msg){
-    return notify('warning', msg)
+function warning(msg, code = 400){
+    return notify('warning', msg, code)
 }
 
-function danger(msg){
-    return notify('danger', msg)
+function danger(msg, code = 500){
+    return notify('error', msg, code)
 }
 
-function info(msg){
-    return notify('info', msg)
+function info(msg, code = 300){
+    return notify('info', msg, code)
 }
 
 export default {

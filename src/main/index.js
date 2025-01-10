@@ -13,7 +13,7 @@ function createWindow() {
         height: 670,
         show: false,
         icon: join(__dirname, '../../resources/icon.png'),
-        autoHideMenuBar: true,
+        autoHideMenuBar: false,
         webPreferences: {
             preload: join(__dirname, "../preload/index.js"),
             sandbox: false,
@@ -27,7 +27,7 @@ function createWindow() {
     const ipc = new Ipc(mainWindow.webContents);
     ipc.request('post', async(data) => {
         const routers = new Routers()
-        ipc.response(data?.ipcid, routers.post(data.controller, data.action, data.request))
+        ipc.response(data?.ipcid, await routers.post(data.controller, data.action, data.params))
     })
 
     mainWindow.on("ready-to-show", () => {

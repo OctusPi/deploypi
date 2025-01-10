@@ -12,14 +12,11 @@ import Ipc from './services/ipc'
 
 onMounted(() => {
     const ipc = new Ipc()
-    ipc.request('ipc-renderer', {
+    ipc.request('post', {
         controller: 'projects',
-        action: 'save',
+        action: 'list',
         ipcid: 'pidsave-project',
-        params: {
-            name: 'Teste',
-            description: 'Teste'
-        }
+        params: {}
     }, (data) => {
         console.log(data);
 

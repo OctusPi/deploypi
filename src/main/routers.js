@@ -7,24 +7,24 @@ class Routers
     mapController(controller)
     {
         const controllers = {
-            'projects': Projects,
-            'works': Works,
-            'histories':Histories
+            'projects': new Projects(),
+            'works': new Works(),
+            'histories': new Histories()
         }
 
         return controllers[controller]
     }
 
-    post(controller, action, request) {
-        const exec = this.mapController(controller)[action]()
-        if (exec) {
-            return exec(request)
-        }
-
-        return {
-            status: 'error',
-            code: 404,
-            message: 'Destino Inexistente'
+    post(controller, action, params) {
+        try {
+            return this.mapController(controller)[action](params)
+        } catch (error) {
+            console.log(error)
+            return {
+                status: 'error',
+                code: 404,
+                message: 'Destino Inexistente'
+            }
         }
     }
 }

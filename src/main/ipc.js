@@ -6,8 +6,8 @@ class Ipc{
     }
 
     request(listen, callback){
-        ipcMain.on(listen, (event, data) => {
-            callback(data)
+        ipcMain.on(listen, async (event, data) => {
+           await callback(data)
         })
     }
 

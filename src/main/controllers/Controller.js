@@ -1,4 +1,4 @@
-import { where } from "sequelize"
+import notifys from "../utils/notifys"
 
 class Controller
 {
@@ -7,12 +7,15 @@ class Controller
     }
 
     save(params) {
+        try {
+            const exec = params?.id
+                ? this.model.update(params, { where: { id: params.id } })
+                : this.model.create(params)
+            return exec.toJson()
 
-        if (params?.id) {
-            return this.model.update(params, {where:{id:params.id}})
+        } catch (error) {
+            return notifys.warning()
         }
-
-        return this.model.create(params)
     }
 
     find(params) {
