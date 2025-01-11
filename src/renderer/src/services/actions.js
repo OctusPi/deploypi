@@ -3,8 +3,9 @@ import forms from "./forms"
 
 class Actions
 {
-    constructor(ipc, data) {
+    constructor(ipc, data, emit) {
         this.ipc = ipc
+        this.emit = emit
         this.data = data
         this.form = forms.builddata( {
             ipcid: Math.floor(Math.random() * 9999).toString(),
@@ -16,12 +17,23 @@ class Actions
     }
 
     save() {
+
+        const check = forms.checkform(this.form, this.data.rules ?? {})
+
+        if (!check.isvalid) {
+            console.log(this.form)
+            console.log(this.data.rules)
+            this.emit('alert', notifys.warning(check.message))
+            return
+        }
+
         this.form.action = 'save'
         this.ipc.request('post', this.form, (resp) => {
             this.data.notify = notifys.notify(resp)
             this.data.ui.modalProject = !!resp?.code != 200
         })
         this.list()
+
     }
 
     find(callback = null) {
