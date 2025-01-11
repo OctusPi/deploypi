@@ -1,6 +1,8 @@
-function builddata(data){
-    const formData = new FormData()
-    Object.entries(data).forEach(([key, value]) => formData.append(key, value));
+import { toRaw } from 'vue'
+
+function builddata(data) {
+    const formData = {}
+    Object.keys(data).forEach(k => formData[k] =  toRaw(data[k]));
     return formData
 }
 
@@ -81,5 +83,4 @@ function checkform(data, rules){
 export default {
     builddata,
     checkform
-
 }

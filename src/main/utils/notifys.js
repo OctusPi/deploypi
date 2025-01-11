@@ -1,6 +1,6 @@
 
-function notify(status, msg, code){
-    return { status, msg, code}
+function notify(status, message, code) {
+    return { notify: { status, message, code } }
 }
 
 function success(msg = '') {
@@ -8,12 +8,14 @@ function success(msg = '') {
     return notify('success', defineMsg, 200)
 }
 
-function warning(msg, code = 400){
-    return notify('warning', msg, code)
+function warning(msg = '', code = 400) {
+    const defineMsg = `Falha ao realizar operação. ${msg}`
+    return notify('warning', defineMsg, code)
 }
 
-function danger(msg, code = 500){
-    return notify('error', msg, code)
+function danger(msg = '', , code = 500) {
+    const defineMsg = `Erro interno contate o suporte. ${msg}`
+    return notify('error', defineMsg, code)
 }
 
 function info(msg, code = 300){
