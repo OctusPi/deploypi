@@ -20,14 +20,14 @@ function createWindow() {
         },
     });
 
-    // execute migrations
+    // sync migrations
     migrations.sync()
 
     // start communication ipc
     const ipc = new Ipc(mainWindow.webContents);
     ipc.request('post', async(data) => {
         const routers = new Routers()
-        ipc.response(data?.ipcid, await routers.post(data.controller, data.action, data.params))
+        ipc.response(data?.ipcid, await routers.post(data))
     })
 
     mainWindow.on("ready-to-show", () => {

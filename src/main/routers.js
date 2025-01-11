@@ -15,9 +15,9 @@ class Routers
         return controllers[controller]
     }
 
-    post(controller, action, params) {
+    post(data) {
         try {
-            return this.mapController(controller)[action](params)
+            return this.mapController(data.controller)[data.action](data)
         } catch (error) {
             console.log(error)
             return {

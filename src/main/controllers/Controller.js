@@ -6,11 +6,11 @@ class Controller
         this.model = model
     }
 
-    save(params) {
+    save(data) {
         try {
-            const exec = params?.id
-                ? this.model.update(params, { where: { id: params.id } })
-                : this.model.create(params)
+            const exec = data?.id
+                ? this.model.update(data.params, { where: { id: data.params.id } })
+                : this.model.create(data.params)
             return exec.toJson()
 
         } catch (error) {
@@ -18,17 +18,17 @@ class Controller
         }
     }
 
-    find(params) {
-        return this.model.findOne({where:params})
+    find(data) {
+        return this.model.findOne({where:data.search})
     }
 
-    list(params = null) {
-        const where = params ? { where: params } : null
+    list(data = null) {
+        const where = data.search ? { where: data.search } : null
         return this.model.findAll(where)
     }
 
-    destroy(params) {
-        return this.model.destroy({where:params})
+    destroy(data) {
+        return this.model.destroy({where:data.params})
     }
 }
 

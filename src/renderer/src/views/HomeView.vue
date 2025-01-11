@@ -25,19 +25,28 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { ref, onMounted } from 'vue'
 import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/vue/24/outline';
 import ProjectForm from '../components/forms/ProjectForm.vue';
+import Actions from '../services/actions';
+import Ipc from '../services/ipc';
 
-const project = reactive({
+const project = ref({
     ui: {
         searchInput:false,
         modalProject: false
     },
-    data: {},
-    search: {
-        name: ''
-    }
+    controller:'projects',
+    params: {},
+    search: {}
+})
+
+const actions = new Actions(new Ipc(), project.value)
+
+onMounted(() => {
+    actions.list((data) => {
+        console.log(data)
+    })
 })
 
 </script>
