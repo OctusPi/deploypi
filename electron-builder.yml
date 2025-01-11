@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: small-pdv
+productName: deploy-pi
 directories:
   buildResources: build
 files:

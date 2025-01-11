@@ -13,7 +13,7 @@ function warning(msg = '', code = 400) {
     return notify('warning', defineMsg, code)
 }
 
-function danger(msg = '', , code = 500) {
+function danger(msg = '', code = 500) {
     const defineMsg = `Erro interno contate o suporte. ${msg}`
     return notify('error', defineMsg, code)
 }

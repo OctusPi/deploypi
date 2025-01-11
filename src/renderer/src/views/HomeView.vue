@@ -25,7 +25,7 @@
                                     <label for="description" class="label-input">Descrição</label>
                                     <textarea id="description" name="description" type="text" v-model="project.target.params.description" class="form-input w-full"></textarea>
                                 </div>
-                                
+
                             </div>
 
                             <div class="flex justify-center items-center space-x-2 mt-6">
@@ -50,7 +50,7 @@
             <header class="flex justify-between items-center mb-2">
                 <h1 class="font-medium text-xs">Projetos</h1>
                 <div class="flex items-center space-x-1">
-                    <button @click="project.ui.modalProject = true" class="flex items-center px-2 py-1 rounded-md font-medium text-xs btn-sm">
+                    <button @click="openModal" class="flex items-center px-2 py-1 rounded-md font-medium text-xs btn-sm">
                         <component :is="PlusIcon" class="w-4 h-4 me-1"></component>
                         Novo
                     </button>
@@ -61,10 +61,20 @@
                 </div>
             </header>
 
-            <input v-if="project.ui.searchInput" type="text" class="flex-1 form-input-search w-full" name="search" v-model="project.search.name" placeholder="localizar projeto" />
+            <input v-if="project.ui.searchInput" type="text" class="flex-1 form-input-search mb-4 w-full" name="search" v-model="project.target.search.name" placeholder="localizar projeto" />
 
-            <div v-for="i in project.datalist">
-                {{ i.dataValues?.name ?? '' }}
+            <div class="mt-4 ct-list-projects">
+                <div v-for="(i,j) in project.datalist" :key="j" class="flex justify-between items-center mb-2 p-2 rounded-md cursor-pointer item-list-projects">
+                    <div>{{ i.dataValues?.name ?? '' }}</div>
+                    <div class="flex items-center space-x-2 m-0 btns-list-projects">
+                        <button class="m-0 p-0" >
+                            <component :is="PencilIcon" class="w-4 h-4"></component>
+                        </button>
+                        <button class="m-0 p-0">
+                            <component :is="TrashIcon" class="w-4 h-4"></component>
+                        </button>
+                    </div>
+                </div>
             </div>
 
         </aside>
@@ -77,7 +87,7 @@ import { reactive, onMounted } from 'vue'
 import Ipc from '../services/ipc';
 import Actions from '../services/actions';
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
-import { MagnifyingGlassIcon, PlusIcon, CheckIcon, XMarkIcon } from '@heroicons/vue/24/outline';
+import { MagnifyingGlassIcon, PlusIcon, CheckIcon, XMarkIcon, PencilIcon, TrashIcon } from '@heroicons/vue/24/outline';
 
 const project = reactive({
     ui: {
@@ -94,6 +104,11 @@ const project = reactive({
 
 const actions = new Actions(new Ipc(), project)
 
+function openModal() {
+    project.target.params = {}
+    project.ui.modalProject =true
+}
+
 onMounted(() => {
     actions.list(() => {
         console.log(project)
@@ -101,3 +116,17 @@ onMounted(() => {
 })
 
 </script>
+
+<style scoped>
+.btns-list-projects{
+    visibility: hidden;
+}
+
+.item-list-projects{
+    background-color: var(--background-color);
+}
+
+.item-list-projects:hover .btns-list-projects{
+    visibility: visible;
+}
+</style>
