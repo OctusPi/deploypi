@@ -24,7 +24,7 @@
 								{{ alerts[alert.notify.status]?.title }}
 							</DialogTitle>
 
-							<div class="mt-2 text-center">
+							<div class="mx-auto mt-2 w-4/5 text-center">
 								<p class="m-0 p-0 text-xs">{{ alert?.notify.message }}</p>
 							</div>
 

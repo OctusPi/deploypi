@@ -2,7 +2,9 @@ import { toRaw } from 'vue'
 
 function builddata(data) {
     const formData = {}
-    Object.keys(data).forEach(k => formData[k] =  toRaw(data[k]));
+    if (data) {
+        Object.keys(data).forEach(k => formData[k] = toRaw(data[k]));
+    }
     return formData
 }
 
@@ -78,7 +80,11 @@ function checkform(data, rules) {
 			const irules = rules[rule].split('|');
 			irules.forEach(r => {
 				const check = checkrule(r, data[rule]);
-				checks.push(check.isvalid);
+                checks.push(check.isvalid);
+
+                if (!check.isvalid) {
+					messages.push(check.message);
+				}
 			});
 		}
 

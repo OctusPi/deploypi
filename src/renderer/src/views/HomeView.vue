@@ -63,11 +63,11 @@
 
             <input v-if="project.ui.searchInput" type="text" class="flex-1 form-input-search mb-4 w-full" name="search" v-model="project.target.search.name" placeholder="localizar projeto" />
 
-            <div class="mt-4 ct-list-projects">
+            <div class="mt-4 aside-main-list">
                 <div v-for="(i,j) in project.datalist" :key="j" class="flex justify-between items-center mb-2 p-2 rounded-md cursor-pointer item-list-projects">
                     <div>{{ i.dataValues?.name ?? '' }}</div>
                     <div class="flex items-center space-x-2 m-0 btns-list-projects">
-                        <button class="m-0 p-0" >
+                        <button class="m-0 p-0" @click="actions.feed(i.dataValues)" >
                             <component :is="PencilIcon" class="w-4 h-4"></component>
                         </button>
                         <button class="m-0 p-0">
@@ -110,13 +110,11 @@ const actions = new Actions(new Ipc(), project, emit)
 
 function openModal() {
     project.target.params = {}
-    project.ui.modalProject =true
+    project.ui.modalProject = true
 }
 
 onMounted(() => {
-    actions.list(() => {
-        console.log(project)
-    })
+    actions.list()
 })
 
 </script>

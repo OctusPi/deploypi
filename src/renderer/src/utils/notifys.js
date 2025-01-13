@@ -64,6 +64,7 @@ function info(msg, code = 300) {
 }
 
 export default {
+    notify,
     success,
     warning,
     danger,

@@ -1,4 +1,4 @@
-# small-pdv
+# Deploy Pi
 
 An Electron application with Vue
 

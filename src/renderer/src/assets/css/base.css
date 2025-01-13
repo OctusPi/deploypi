@@ -123,3 +123,39 @@ body {
 .active-link {
 	@apply font-semibold text-purple-400 hover:text-purple-500;
 }
+
+/* Para navegadores baseados em Webkit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+    width: 2px;
+    height: 2px; /* Para barras de rolagem horizontal */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888; /* Cor do indicador */
+    border-radius: 1px; /* Bordas arredondadas */
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Cor do indicador ao passar o mouse */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Cor do fundo da barra de rolagem */
+  }
+
+  /* Para navegadores Firefox */
+  * {
+    scrollbar-width: thin; /* Define a largura como "fina" */
+    scrollbar-color: #888 #f1f1f1; /* Cor do indicador e do fundo */
+  }
+
+  /* Estilização adicional para navegadores modernos usando pseudo-elementos */
+  body::-webkit-scrollbar-thumb {
+    background-color: #888; /* Cor do indicador */
+  }
+
+  body::-webkit-scrollbar {
+    background-color: #f1f1f1; /* Cor do fundo */
+    width: 2px; /* Largura da barra */
+  }
+

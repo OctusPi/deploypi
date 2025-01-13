@@ -8,12 +8,13 @@ class Controller
 
     save(data) {
         try {
-            const exec = data?.id
+            const exec = data.params?.id
                 ? this.model.update(data.params, { where: { id: data.params.id } })
                 : this.model.create(data.params)
             return exec.toJson()
 
         } catch (error) {
+
             return notifys.warning()
         }
     }

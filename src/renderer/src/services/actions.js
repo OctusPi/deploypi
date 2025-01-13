@@ -7,37 +7,47 @@ class Actions
         this.ipc = ipc
         this.emit = emit
         this.data = data
-        this.form = forms.builddata( {
+        this.form = {
             ipcid: Math.floor(Math.random() * 9999).toString(),
             controller: '',
             params: {},
-            search: {},
-            ...data?.target ?? {}
-        })
+            search: {}
+        }
+    }
+
+    build(data, action) {
+        this.form = {
+            ...this.form,
+            ...forms.builddata(data),
+            action: action
+        }
+    }
+
+    feed(params) {
+        this.data.target.params = params
+        this.data.ui.modalProject = true
     }
 
     save() {
-
-        const check = forms.checkform(this.form, this.data.rules ?? {})
+        this.build(this.data.target, 'save')
+        const check = forms.checkform(this.form.params, this.data.rules ?? {})
 
         if (!check.isvalid) {
-            console.log(this.form)
-            console.log(this.data.rules)
             this.emit('alert', notifys.warning(check.message))
             return
         }
 
-        this.form.action = 'save'
+
         this.ipc.request('post', this.form, (resp) => {
             this.data.notify = notifys.notify(resp)
-            this.data.ui.modalProject = !!resp?.code != 200
+            this.data.ui.modalProject = !resp?.notify?.code == 200
         })
-        this.list()
 
+        this.list()
     }
 
     find(callback = null) {
-        this.form.action = 'find'
+        this.build(this.data.target, 'find')
         this.ipc.request('post', this.form, (data) => {
             this.data.params = data
             if (callback) {
@@ -47,8 +57,7 @@ class Actions
     }
 
     list(callback = null) {
-        this.form.action = 'list'
-
+        this.build(this.data.target, 'list')
         this.ipc.request('post', this.form, (data) => {
             this.data.datalist = data
             if (callback) {
@@ -58,11 +67,11 @@ class Actions
     }
 
     destroy() {
-        this.form.action = 'destroy'
+        this.build(this.data.target, 'destroy')
         this.ipc.request('post', this.form, (data) => {
             notifys.notify(data)
-            this.list()
         })
+        this.list()
     }
 }
 
